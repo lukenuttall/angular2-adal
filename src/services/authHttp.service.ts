@@ -62,13 +62,10 @@ export class AuthHttp {
                             options1.headers = new Headers();
                         }
                         options1.headers.append('Authorization', 'Bearer ' + token);
-                        return this.http.request(url, options1)
-                            .catch(this.handleError);
                     });
             }
-            else {
-                authenticatedCall = Observable.throw(new Error("User Not Authenticated."));
-            }
+            return this.http.request(url, options1)
+                            .catch(this.handleError);
         }
         else {
             authenticatedCall = this.http.request(url, options).map(this.extractData).catch(this.handleError);
